@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carousel Expo Campus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+  html, body {
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+}
+
+  .carousel{
+  position:fixed;
+  inset:0;
+  width:100dvw;
+  height:100dvh;
+}
+
+.carousel-track{
+  height:100%;
+}
+
+.carousel-track {
+  display: flex;
+  height: 100%;
+  transition: transform .6s cubic-bezier(.77,0,.175,1);
+}
+  .carousel-item{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:60px;
+  letter-spacing:3px;
+  font-weight:700;
+  text-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+.carousel-item{
+  transition: opacity .8s ease, filter .8s ease;
+}
+.carousel-item{
+  min-width:100%;
+  height:100%;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.carousel-item.inactive{
+  opacity:.4;
+  filter:blur(2px) brightness(.75);
+}
+
+.carousel-item {
+  min-width: 100%;
+  height: 100%;
+  font-size: 36px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-item:nth-child(1){background:#050B1A;}
+.carousel-item:nth-child(2){background:#050B1A;}
+.carousel-item:nth-child(3){background:#050B1A;}
+.carousel-item:nth-child(4){background:#050B1A;}
+.carousel-item:nth-child(5){background:#050B1A;}
+.carousel-item:nth-child(6){background:#050B1A;}
+.carousel-item:nth-child(7){background:#050B1A;}
+.carousel-item:nth-child(8){background:#050B1A;}
+.carousel-item:nth-child(9){background:#050B1A;}
+.carousel-item:nth-child(10){background:#050B1A;}
+.carousel-item:nth-child(11){background:#050B1A;}
+
+.carousel-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  border:none;
+  background:rgba(0,0,0,.4);
+  color:white;
+  font-size:28px;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  cursor:pointer;
+}
+.prev{left:10px;}
+.next{right:10px;}
+
+.slide-content{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.slide-title{
+  font-size:64px;
+  font-weight:700;
+  letter-spacing:4px;
+}
+
+.paragraph{
+  margin-top:20px;
+  font-size:22px;
+  opacity:.85;
+}
+
+.slide-content{
+  text-align:center;
+  max-width:900px;
+  padding:40px;
+  animation:fadeUp .9s ease both;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.paragraph{
+  font-family:'Inter', sans-serif;
+  font-size:22px;
+  opacity:.8;
+  letter-spacing:1px;
+  margin-top:18px;
+}
+.carousel::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.65),
+    rgba(0,0,0,.25),
+    rgba(0,0,0,.7)
+  );
+  pointer-events:none;
+}
+.qr-slide{
+  display:grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap:80px;
+  align-items:center;
+  max-width:1100px;
+  padding:60px;
+}
+
+.qr-text{
+  font-size:48px;
+  line-height:1.25;
+  letter-spacing:2px;
+}
+
+.qr-box{
+  background:white;
+  padding:5px;
+  border-radius: 20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+}
+
+.qr-box img{
+  width:220px;
+  display:block;
+}
+
+.qr-caption{
+  margin-top:12px;
+  font-size:14px;
+  color:#333;
+  text-align:center;
+  letter-spacing:1px;
+}
+
+.qr-slide{
+  grid-template-columns: 1fr 420px;   /* QR fixed width */
+}
+
+.qr-text{
+  font-size:54px;
+  line-height:1.15;
+  letter-spacing:3px;
+  opacity:.95;
+}
+
+.qr-box{
+  background:linear-gradient(135deg,#f5f5f5,#ddd);
+  padding:28px;
+  border-radius:26px;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.qr-box img{
+  width:220px;
+  aspect-ratio:1/1;
+  object-fit:contain;
+  display:block;
+}
+
+.pens-watermark{
+  position:fixed;
+  top:30px;
+  right:30px;
+  width:110px;
+  opacity: .5;
+  pointer-events:none;
+  z-index:50;
+  filter:drop-shadow(0 6px 18px rgba(0,0,0,.6));
+}
+
+.slide-content{
+  justify-content:space-between;
+}
+
+.cta-btn{
+  margin-top:35px;
+  padding:16px 54px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#00c6ff,#0072ff);
+  color:white;
+  text-decoration:none;
+  letter-spacing:3px;
+  font-size:14px;
+  box-shadow:0 0 30px rgba(0,198,255,.7);
+  transition:.3s;
+}
+
+.cta-btn:hover{
+  transform:scale(1.12);
+  box-shadow:0 0 50px rgba(0,198,255,1);
+
+  
+}
+
+.dept-slide{
+  display:grid;
+  grid-template-columns: 1.6fr 1fr;   /* kiri lebih lebar */
+  gap:80px;
+  max-width:1200px;
+  padding:40px;
+  align-items:start;
+}
+
+.dept-title{
+  font-size:52px;
+  letter-spacing:3px;
+}
+
+.accent-line{
+  height:4px;
+  margin:18px 0 30px;
+}
+
+.line-yellow{background:#c6ff00; width:fit-content; min-width:420px;}
+.line-blue{background:#00c6ff; width:fit-content; min-width:420px;}
+.line-green{background:#00ff88; width:fit-content; min-width:420px;}
+.line-red{background:#ff0000; width:fit-content; min-width:420px;}
+
+.dept-desc{
+  font-family:'Inter', sans-serif;
+  font-size:18px;
+  line-height:1.7;
+  opacity:.85;
+  text-align:justify;   
+}
+
+.dept-list{
+  font-family:'Inter', sans-serif;
+  font-size:18px;
+  line-height:1.9;
+  text-align:left;    
+}
+
+.badge-new{
+  display:inline-block;
+  margin-left:8px;
+  padding:4px 10px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#ff416c,#ff4b2b);
+  color:white;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:1px;
+  box-shadow:0 0 15px rgba(255,75,75,.7);
+  vertical-align:middle;
+}
+
+.rank-slide{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+}
+
+.rank-slide img{
+  max-width:85%;
+  max-height:85%;
+  border-radius:18px;
+  box-shadow:0 30px 80px rgba(0,0,0,.7);
+  animation:fadeUp .9s ease both;
+}
+
+
+</style>
+</head>
+<body>
+  <img src="asset/logo.png" class="pens-watermark">
+<div class="carousel">
+  <div class="carousel-track">
+<div class="carousel-item">
+  <div class="slide-content">
+    <div class="slide-title">WE ENGINEER THE FUTURE</div>
+    <div class="paragraph">POLITEKNIK ELEKTRONIKA NEGERI SURABAYA</div>
+  </div>
+</div>
+<div class="carousel-item">
+  <div class="rank-slide">
+    <img src="asset/InovasiRiset.jpg" alt="Top 10 Kampus Inovasi Riset Indonesia">
+  </div>
+</div>
+<div class="carousel-item">
+  <div class="slide-content dept-slide">
+    <div>
+      <div class="dept-title">DEPARTEMEN TEKNIK ELEKTRO</div>
+      <div class="accent-line line-yellow"></div>
+      <div class="dept-desc">
+      Departemen Elektro hadir menjawab tingginya kebutuhan masyarakat akan tenaga pakar di ranah inovasi elektronika, sistem komunikasi dan ketenagalistrikan industri.
+      Departemen ini bercita-cita menjadi pusat unggul pembelajaran dan teknologi khususnya <i>emerging technology</i>, sekaligus melahirkan lulusan yang tangguh dan adaptif di ranah Elektronika, Telekomunikasi, dan Elektro Industri.
+      </div>
+    </div>
+    <div class="dept-list">
+      1. D4 Terapan & D3 Teknik Elektronika<br>
+      2. D4 Terapan & D3 Teknik Elektro Industri<br>
+      3. D4 Terapan & D3 Teknik Telekomunikasi<br>
+      4. D4 Terapan Teknologi Rekayasa Internet<br>
+      5. D3 Teknologi Rekayasa Keselamatan K3<span class="badge-new">BARU</span>
+    </div>
+  </div>
+</div>
+<div class="carousel-item">
+  <div class="slide-content dept-slide">
+    <div>
+      <div class="dept-title">DEPARTEMEN TEKNIK INFORMATIKA DAN KOMPUTER</div>
+      <div class="accent-line line-blue"></div>
+      <div class="dept-desc">
+        Departemen Teknik Informatika dan Komputer PENS hadir menjawab peran vital teknologi informasi sebagai tulang punggung pertumbuhan bangsa.
+        Mengusung <i>emerging technology</i>, departemen ini menaungi program D3, D4, dan S2 Terapan, serta melahirkan lulusan adaptif, profesional, dan siap bersaing di ekosistem industri digital global.
+      </div>
+    </div>
+    <div class="dept-list">
+      1. D4 Terapan & D3 Teknik Informatika<br>
+      2. D4 Terapan Teknik Komputer<br>
+      3. D4 Terapan Sains Data Terapan<br>
+      4. D3 Teknik Informatika (Kampus Sumenep)<br>
+      5. D3 Teknik Informatika (Kampus Lamongan)
+    </div>
+  </div>
+</div>
+<div class="carousel-item">
+  <div class="slide-content dept-slide">
+    <div>
+      <div class="dept-title">DEPARTEMEN TEKNIK MEKANIKA DAN ENERGI</div>
+      <div class="accent-line line-green"></div>
+      <div class="dept-desc">
+      Departemen Teknik Mekanika Energi PENS menaungi Sarjana Terapan Teknik Mekatronika dan Sistem Pembangkit Energi sejak 2011.
+      Berprestasi hingga ajang World Skill Competition Abu Dhabi, departemen ini memadukan mesin, elektronika, informatika, dan kendali untuk melahirkan lulusan andal pengembang sistem dan inovator teknologi energi berkelanjutan masa depan.
+      </div>
+    </div>
+    <div class="dept-list">
+      1. D4 Terapan Teknik Mekatronika<br>
+      2. D4 Terapan Teknik Sistem Pembangkit Energi<br>
+      3. D4 Terapan Teknologi Rekayasa Perancangan Manufaktur <span class="badge-new">BARU</span>
+    </div>
+  </div>
+</div>
+<div class="carousel-item">
+  <div class="slide-content dept-slide">
+    <div>
+      <div class="dept-title">DEPARTEMEN TEKNIK MULTIMEDIA KREATIF</div>
+      <div class="accent-line line-red"></div>
+      <div class="dept-desc">
+      Departemen Teknologi Multimedia Kreatif PENS menaungi D3 Multimedia Broadcasting dan D4 Game Technology sejak 2012.
+      Berfokus pada film, musik, fotografi, penyiaran, dan game, departemen ini melahirkan insan kreatif penguasa teknologi multimedia yang aktif mengembangkan industri kreatif, riset, pengabdian masyarakat, serta ekosistem pembelajaran profesional berstandar global.
+      </div>
+    </div>
+    <div class="dept-list">
+      1. D4 Terapan Teknologi Game<br>
+      2. D4 Terapan Teknologi Rekayasa Multimedia<br>
+      3. D3 Teknologi Multimedia Broadcasting <br>
+      4. D3 Teknologi Multimedia Broadcasting (Kampus Sumenep)<br>
+      5. D3 Teknologi Multimedia Broadcasting (Kampus Lamongan) <br>
+      6. D4 Terapan Bisnis Digital <span class="badge-new">BARU</span>
+    </div>
+  </div>
+</div>
+<div class="carousel-item">
+  <div class="slide-content qr-slide">
+    <div class="qr-text">INGIN COBA<br>APLIKASI<br>BUATAN KAMI?</div>
+    <div class="qr-box">
+      <img src="asset/timetocode.png">
+      <div class="qr-caption">Time to Code</div>
+    </div>
+  </div>
+</div>
+<div class="carousel-item">
+  <div class="slide-content">
+    <div class="slide-title">WANT MERCHANDISE?</div>
+    <div class="paragraph">Click Button Below</div>
+    <a href="game/index.php" class="cta-btn">TRY IT</a>
+  </div>
+</div>
+<div class="carousel-item">
+  <div class="slide-content">
+    <div class="slide-title">FROM CODE TO REALITY!!</div>
+    <div class="paragraph">We turn your ideas into digital experiences</div>
+  </div>
+</div>
+
+
+  </div>
+
+  <button class="carousel-btn prev">❮</button>
+  <button class="carousel-btn next">❯</button>
+</div>
+
+<script>
+const track = document.querySelector(".carousel-track");
+const slides = document.querySelectorAll(".carousel-item");
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
+
+let index = 0;
+
+function updateCarousel(){
+  track.style.transform = `translateX(-${index * 100}%)`;
+
+  slides.forEach((slide,i)=>{
+    if(i === index){
+      slide.classList.remove("inactive");
+    }else{
+      slide.classList.add("inactive");
+    }
+  });
+}
+
+nextBtn.onclick = () => {
+  index = (index + 1) % slides.length;
+  updateCarousel();
+}
+
+prevBtn.onclick = () => {
+  index = (index - 1 + slides.length) % slides.length;
+  updateCarousel();
+}
+
+/* autoplay */
+setInterval(() => {
+  index = (index + 1) % slides.length;
+  updateCarousel();
+}, 30000);
+
+updateCarousel();
+</script>
+</body>
+</html>
